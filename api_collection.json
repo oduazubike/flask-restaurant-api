@@ -1,0 +1,3130 @@
+{
+	"info": {
+		"_postman_id": "8e2de34e-984a-4fe9-ae71-de036fd1f010",
+		"name": "Restaurant API Collection",
+		"description": "# Restaurant API\n\nThis API(identifiable as Restaurant API in the meantime) will serve as an online collection of restaurants, for existing or newly created online and onsite restaurants, providing them another platform for sales.\n\nIt is a mobile food vendor to customer services. Food vendors will place food items they have on their profile, with cost price(including delivery), customers will scan through, find what they want and place orders. Payments will be made to the platform, vendors can withdraw from their account at anytime.\n\nEndpoints for this API is exposes in this documentation, with instructions and examples of requests and expected responses.\n\n**Authentication**: This API uses JWT authentication, and some of its endpoint requires a valid JWT to be supplied in the request header.\n\n**Configuration**: This collection requires several predefined environment variable, which are listed below. You will need to add them to your own environment when testing with Postman\n\n`url`: The root url. The default value should be 127.0.0.1:5000  \n`access_token`: JWT used for login. It will be set automatically by some of the request test scripts.  \n`refresh_token`: Used for refreshing a JWT. It will be set automatically by some of the request test scripts.",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20762208"
+	},
+	"item": [
+		{
+			"name": "vendors",
+			"item": [
+				{
+					"name": "Email Register",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vendor/email",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"email"
+							]
+						},
+						"description": "#### Initializes a Vendor's registration. Sends Vendor's confirmation ID and Registration Link in email. Use confirmation ID received in email to build Register Vendor request.\n\n`Note:`\n\n\\* Duplicate **Email** not allowed  \n\\* Invalid email will return a 500"
+					},
+					"response": [
+						{
+							"name": "Email Register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"description": "Successfully sent email",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/email",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"email"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:06:19 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "114"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"An Email has been sent to <oduazubike@gmail.com>. Please open and complete your Registration\"\n}"
+						},
+						{
+							"name": "Email already exists",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/email",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"email"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:17:17 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Email <oduazubike@gmail.com> already exists!\"\n}"
+						},
+						{
+							"name": "Invalid email /internal server error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"od11zubike@gmail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/email",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"email"
+									]
+								}
+							},
+							"status": "INTERNAL SERVER ERROR",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:19:24 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "84"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Error in sending confirmation email, user registration failed.\"\n}"
+						},
+						{
+							"name": "Internal Server Error",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"od11zubike@gmail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/email",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"email"
+									]
+								}
+							},
+							"status": "INTERNAL SERVER ERROR",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:27:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "93"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Internal server error! An error occurred while processing your request.\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Resend Email",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vendor/resend_email/john_doe@gmail.com",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"resend_email",
+								"john_doe@gmail.com"
+							]
+						},
+						"description": "#### This Resource is to request a resend of the confirmation email in case the initial one expires, or is unused for some other reasons . It receives the email in the path parameter. ID sent to email also to be used for building Register Vendor request URL.\n\n`Note:`\n\n\\* Email must already exist(must have already registered email)  \n\\* Will only process request for un-validated email accounts  \n\\* Email must be passed in URL"
+					},
+					"response": [
+						{
+							"name": "Resend Email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "",
+										"value": "",
+										"description": "Successfully re-sent email",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/resend_email/oduazubike@gmail.com",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"resend_email",
+										"oduazubike@gmail.com"
+									],
+									"query": [
+										{
+											"key": null,
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:32:21 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "94"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Confirmation Email has been re-sent to your email <oduazubike@gmail.com>\"\n}"
+						},
+						{
+							"name": "Already validated email",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/resend_email/oduazubike@gmail.com",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"resend_email",
+										"oduazubike@gmail.com"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:49:55 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "81"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Account with email <oduazubike@gmail.com> already Validated\"\n}"
+						},
+						{
+							"name": "Account for such email not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/resend_email/victor@gmail.com",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"resend_email",
+										"victor@gmail.com"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 09 Oct 2022 21:58:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Vendor Account Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Register Vendor",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"",
+									"pm.test(\"refresh token not empty\", function () {",
+									"    pm.expect(jsonData.refresh_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}",
+									"// set refresh token as environement variable",
+									"if (jsonData.refresh_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"full_name\": \"Odu Doe\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"Azu foods\",\n    \"city\": \"Star city\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vendor/register/65034ab09c114288b368a840d0a6244f",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"register",
+								"65034ab09c114288b368a840d0a6244f"
+							]
+						},
+						"description": "#### This Resource completes the registration of a Vendor. Uses the confirmation ID sent in the email as path parameter.\n\n`Note:`\n\n\\* Duplicate **Restaurant name** not allowed  \n\\* Confirmation ID expires in 30 minutes  \n\\* Confirmation ID can only be used once"
+					},
+					"response": [
+						{
+							"name": "Register Vendor",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Odu Victor Azubike\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"Fast Foods\",\n    \"city\": \"Real city\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/register/a32c44a4f57d4b5caad0c071df1e26df",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"register",
+										"a32c44a4f57d4b5caad0c071df1e26df"
+									]
+								}
+							},
+							"status": "CREATED",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 11:31:45 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "66"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Restaurant <Fast Foods> created successfully\"\n}"
+						},
+						{
+							"name": "Not found or wrong confirmation ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Odu Victor Azubike\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"Fast Foods\",\n    \"city\": \"Real city\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/register/a32c44a4f57d4b5caad0c071df1e26d",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"register",
+										"a32c44a4f57d4b5caad0c071df1e26d"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 11:33:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "47"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Confirmation ID not found\"\n}"
+						},
+						{
+							"name": "Expired confirmation ID",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Odu Victor Azubike\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"Fast Foods\",\n    \"city\": \"Real city\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/register/a32c44a4f57d4b5caad0c071df1e26df",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"register",
+										"a32c44a4f57d4b5caad0c071df1e26df"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 11:35:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Confirmation ID has expired\"\n}"
+						},
+						{
+							"name": "Already existing Restaurant name",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Odu Victor Azubike\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"Fast Foods\",\n    \"city\": \"Real city\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/register/830225734c9745d7a649dedf3268f390",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"register",
+										"830225734c9745d7a649dedf3268f390"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 11:45:35 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Restaurant name <Fast Foods> already exists, please choose another one\"\n}"
+						},
+						{
+							"name": "Confirmation ID/Vendor already validated",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"full_name\": \"Victor Azubike\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"Free Foods\",\n    \"city\": \"Real city\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/register/830225734c9745d7a649dedf3268f390",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"register",
+										"830225734c9745d7a649dedf3268f390"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 11:48:04 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "113"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Confirmation ID already validated! Ensure to use correct confirmation ID sent to your Email\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Vendor Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"",
+									"pm.test(\"refresh token not empty\", function () {",
+									"    pm.expect(jsonData.refresh_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}",
+									"// set refresh token as environement variable",
+									"if (jsonData.refresh_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", jsonData.refresh_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"refresh_token\", null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/vendor/login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"login"
+							]
+						},
+						"description": "#### Logs a Vendor in, by issuing an access and refresh token. Tokens to be used in the Authorization header for protected Resources.\n\n`Notes:`\n\n\\*   Account must be created and validated before login\n\\*   Access token expires after 15 minutes after which refresh token should be requested"
+					},
+					"response": [
+						{
+							"name": "Vendor Login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/login",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 12:25:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "575"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY1NDA0NzE4LCJqdGkiOiI4MzMyOGRmMi03ODEzLTQxZjItOTY1MS1kMTYzNGY0ZDhjMjkiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE2NjU0MDQ3MTgsImV4cCI6MTY2NTQwNTYxOH0.XtQyceYy8sePJa-xzEhs26W2tKirsqU_1Mr8ZOHnFGk\",\n    \"refresh_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQwNDcxOCwianRpIjoiOTkyMjEzMjMtZGFhOS00YmM0LTg4OGYtZDg0NDc2NzJiMGExIiwidHlwZSI6InJlZnJlc2giLCJzdWIiOjEsIm5iZiI6MTY2NTQwNDcxOCwiZXhwIjoxNjY3OTk2NzE4fQ.rupF5egys3i6Z7c2VJtC57khd2k6g-Xs49cD4YKCM1s\"\n}"
+						},
+						{
+							"name": "Incorrect email/passowrd supplied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"passord\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"login"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 12:35:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Invalid credentials supplied\"\n}"
+						},
+						{
+							"name": "Unvalidated or unregistered account",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"zubic@gmail.com\",\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/vendor/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"login"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 12:39:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "110"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Account not validated yet! Check email and proceed to complete Registration before login\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Token Refrehing",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{refresh_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "{{url}}//vendor/refresh",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"",
+								"vendor",
+								"refresh"
+							]
+						},
+						"description": "#### This Resource refreshes a Vendor's token, when expired. It issues a non-fresh token and requires a refresh token as Authorization header.\n\n`Note:`\n\n\\*   Requires Authorization header, set to `Bearer {refresh_token}`\n\\*   Must be logged in before making this request\n\\*   Must send a valid JWT token"
+					},
+					"response": [
+						{
+							"name": "Token Refrehing",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDIxOTc3NSwianRpIjoiMzcxNmFmYjYtNWNjOC00NGI5LWI3MmMtZjJmMWE2NWY3MDg2...",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000//vendor/refresh",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"",
+										"vendor",
+										"refresh"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 12:55:09 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "288"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQwNjUwOSwianRpIjoiNTRkOGRiZTEtZDU3Ny00YTI1LWJiNjYtZmJkNjg2MjllZWZmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6MSwibmJmIjoxNjY1NDA2NTA5LCJleHAiOjE2NjU0MDc0MDl9.rsWCFdyUlVx_LKEZNbKyEitspvnS3hLy6M5T9_ZS6xc\"\n}"
+						},
+						{
+							"name": "Invalid token/not logged-in",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{refresh_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}//vendor/refresh",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"",
+										"vendor",
+										"refresh"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 12:53:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "79"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Description\": \"This is not a valid jwt token\",\n    \"Error\": \"Invalid JWT\"\n}"
+						},
+						{
+							"name": "Token authorization header required",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}//vendor/refresh",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"",
+										"vendor",
+										"refresh"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 12:56:10 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "101"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Description\": \"You need a token to access the endpoint\",\n    \"Error\": \"Token required endpoint\"\n}"
+						}
+					]
+				},
+				{
+					"name": "For Critical Logins",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = pm.response.json();",
+									"pm.test(\"access_token not empty\", function () {",
+									"    pm.expect(jsonData.access_token).not.eql(undefined);",
+									"});",
+									"// set access token as environement variable",
+									"if (jsonData.access_token !== undefined) {",
+									"    postman.setEnvironmentVariable(\"access_token\", jsonData.access_token);",
+									"} else {",
+									"    postman.setEnvironmentVariable(\"access_token\", null);",
+									"}"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{refresh_token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"passord\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}//vendor/critical_login",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"",
+								"vendor",
+								"critical_login"
+							]
+						},
+						"description": "#### This request is made when critical actions or resources(resources that requires only fresh tokens) are requested with a non-fresh tokens. It issues a fresh access token and requires a refresh token.\n\n`Note:`\n\n\\* Password of logged in vendor must be correct.  \n\\* Authorization header must be set to `Bearer {refresh_token}`"
+					},
+					"response": [
+						{
+							"name": "For Critical Logins",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDIxOTc3NSwianRpIjoiMzcxNmFmYjYtNWNjOC00NGI5LWI3MmMtZjJmMWE2NWY3MDg2...",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"password\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "127.0.0.1:5000//vendor/critical_login",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"",
+										"vendor",
+										"critical_login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 13:14:41 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "287"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"access_token\": \"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY1NDA3NjgxLCJqdGkiOiI0NWE4ZWMzNy1kYTBhLTQxNmYtOGMzMi1iYjJjODU5YjVmYTUiLCJ0eXBlIjoiYWNjZXNzIiwic3ViIjoxLCJuYmYiOjE2NjU0MDc2ODEsImV4cCI6MTY2NTQwODU4MX0.getJGlB8u9wK4-J-nZNPZXRYps8WmxAcHce7kpJlqoI\"\n}"
+						},
+						{
+							"name": "Incorrect password supplied",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{refresh_token}}",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"passord\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}//vendor/critical_login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"",
+										"vendor",
+										"critical_login"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 13:15:18 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "50"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Invalid credentials supplied\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Vendor details",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"1"
+							]
+						},
+						"description": "#### This Resource takes the Vendor's ID in the URL as path parameter and returns the Vendor's details."
+					},
+					"response": [
+						{
+							"name": "Vendor details",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 13:53:57 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "253"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"date_created\": \"2022-10-10 11:31:45.584063+00:00\",\n    \"full_name\": \"Odu Victor Azubike\",\n    \"email\": \"oduazubike@gmail.com\",\n    \"city\": \"Real city\",\n    \"restaurant\": \"Fast Foods\",\n    \"validated\": true,\n    \"dob\": \"7 11, 2022\",\n    \"id\": 1\n}"
+						},
+						{
+							"name": "Account not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vendor/10",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"10"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 14:01:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Vendor Account Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Vendor",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vendor/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"1"
+							]
+						},
+						"description": "#### This Resource deletes a Vendor's account. It takes Vendor ID in the URL as path parameter.\n\n`Note:`\n\n\\*   Authorization header must be set to `Bearer {access_token}`\n\\*   Token must be fresh\n\\*   Operation privilege limited to owner of the account"
+					},
+					"response": [
+						{
+							"name": "Delete a Vendor",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/1",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"1"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 14:18:34 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "44"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Vendor Account Deleted\"\n}"
+						},
+						{
+							"name": "Account not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/24",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"24"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 14:15:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Vendor Account Not Found\"\n}"
+						},
+						{
+							"name": "operation  privilege not granted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"2"
+									]
+								}
+							},
+							"status": "FORBIDDEN",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 14:17:00 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"You do not have the privilege to perform this operation\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All Vendors",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendors",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendors"
+							]
+						},
+						"description": "#### This Resource returns all Vendor accounts, and their full details"
+					},
+					"response": [
+						{
+							"name": "Get All Vendors",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:5000/vendors",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendors"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 19:09:16 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "643"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Vendors\": [\n        {\n            \"email\": \"victor@gmail.com\",\n            \"id\": 2,\n            \"validated\": true,\n            \"city\": \"Real city\",\n            \"date_created\": \"2022-10-10 11:47:50.579309+00:00\",\n            \"dob\": \"7 11, 2022\",\n            \"restaurant\": \"Free Foods\",\n            \"full_name\": \"Victor Azubike\"\n        },\n        {\n            \"email\": \"zubic@gmail.com\",\n            \"id\": 3,\n            \"validated\": false,\n            \"city\": null,\n            \"date_created\": \"2022-10-10 12:38:07.154208+00:00\",\n            \"dob\": null,\n            \"restaurant\": null,\n            \"full_name\": null\n        }\n    ]\n}"
+						}
+					]
+				},
+				{
+					"name": "Get All of a Vendor's Confirmation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendor/confirmations/40",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"confirmations",
+								"40"
+							]
+						},
+						"description": "#### This Resource returns all confirmation details of a Vendor. This is meant for testing only"
+					},
+					"response": [
+						{
+							"name": "Get All of a Vendor's Confirmation",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/confirmations/4",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"confirmations",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 19:35:28 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "342"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Current-Time\": 1665430528,\n    \"Confirmations\": [\n        {\n            \"expire_at\": 1665430363,\n            \"vendor_id\": 4,\n            \"id\": \"01225683e23c4cdbaba270f8d2fa0055\"\n        },\n        {\n            \"expire_at\": 1665432163,\n            \"vendor_id\": 4,\n            \"id\": \"c45c03641f5b4681a6f907804d780248\"\n        }\n    ]\n}"
+						},
+						{
+							"name": "Account not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vendor/confirmations/40",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"confirmations",
+										"40"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 19:36:13 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Vendor Account Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Most Recent Confirmation",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/vendor/recent_confirmation/40",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"recent_confirmation",
+								"40"
+							]
+						},
+						"description": "#### Returns the most recent confirmation details of a Vendor. This resource is for testing only."
+					},
+					"response": [
+						{
+							"name": "Most Recent Confirmation",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/recent_confirmation/4",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"recent_confirmation",
+										"4"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 19:54:42 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "98"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"expire_at\": 1665432163,\n    \"vendor_id\": 4,\n    \"id\": \"c45c03641f5b4681a6f907804d780248\"\n}"
+						},
+						{
+							"name": "Account not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "{{url}}/vendor/recent_confirmation/40",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"recent_confirmation",
+										"40"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 20:02:47 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Vendor Account Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Forgot Password",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"oduazubike@gmail.com\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/vendor/forgot/password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"forgot",
+								"password"
+							]
+						},
+						"description": "### This Resource is for requesting a password reset, when password is forgotten. A token is sent to Vendor's email. Token is to be used in URL as path parameter for the Reset Password request or resource."
+					},
+					"response": [
+						{
+							"name": "Forgot Password",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"oduazubike@gmail.com\"\n}"
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/forgot/password",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"forgot",
+										"password"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 20:44:08 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "85"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"An email has been sent to you, to allow you reset your password\"\n}"
+						},
+						{
+							"name": "Account with email not found",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"oduaubike@gmail.com\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/vendor/forgot/password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"forgot",
+										"password"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 20:45:54 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "46"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Vendor Account Not Found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Reset Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"pass\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/vendor/reset/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQzNTc5NSwianRpIjoiMTNlYTc2NTUtY2YwOC00MWVmLWI0MDQtZDgzZTg1ZjBkZjY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjY1NDM1Nzk1LCJleHAiOjE2NjU0MzYwOTV9.EQX__SYN358KE6wjiFyyjFnvrSnUCLeqqTKNW-ZtOM8",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"reset",
+								"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQzNTc5NSwianRpIjoiMTNlYTc2NTUtY2YwOC00MWVmLWI0MDQtZDgzZTg1ZjBkZjY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjY1NDM1Nzk1LCJleHAiOjE2NjU0MzYwOTV9.EQX__SYN358KE6wjiFyyjFnvrSnUCLeqqTKNW-ZtOM8"
+							]
+						},
+						"description": "### This Resource is to reset password when forgotten. The token sent to email from the Forgot Password request is used. Token used is immediately revoked after a successful password reset.\n\n`Note:`\n\n\\*   Token expires after 5 minutes"
+					},
+					"response": [
+						{
+							"name": "Reset Password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"pass\"\n}"
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/reset/eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQzNTc5NSwianRpIjoiMTNlYTc2NTUtY2YwOC00MWVmLWI0MDQtZDgzZTg1ZjBkZjY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjY1NDM1Nzk1LCJleHAiOjE2NjU0MzYwOTV9.EQX__SYN358KE6wjiFyyjFnvrSnUCLeqqTKNW-ZtOM8",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"reset",
+										"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQzNTc5NSwianRpIjoiMTNlYTc2NTUtY2YwOC00MWVmLWI0MDQtZDgzZTg1ZjBkZjY4IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjY1NDM1Nzk1LCJleHAiOjE2NjU0MzYwOTV9.EQX__SYN358KE6wjiFyyjFnvrSnUCLeqqTKNW-ZtOM8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 21:04:44 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "103"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Your Password Reset was successful! You will need to login with your new password\"\n}"
+						},
+						{
+							"name": "Expired token",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"password\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/vendor/reset/eyJ0eXAiOiJKV1QiLCJhbGciOiJeUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQzNDY0MCwianRpIjoiM2U3Y2FkNmEtNGQzMS00YmU5LTg2NTAtN2NjNTQ3ODRhNGUwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjY1NDM0NjQwLCJleHAiOjE2NjU0MzQ5NDB9.uARd6RMiBK0wpVtk8JHYA36o5aVCsb0vMgcQLay265Q",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"reset",
+										"eyJ0eXAiOiJKV1QiLCJhbGciOiJeUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NTQzNDY0MCwianRpIjoiM2U3Y2FkNmEtNGQzMS00YmU5LTg2NTAtN2NjNTQ3ODRhNGUwIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6NSwibmJmIjoxNjY1NDM0NjQwLCJleHAiOjE2NjU0MzQ5NDB9.uARd6RMiBK0wpVtk8JHYA36o5aVCsb0vMgcQLay265Q"
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 20:59:58 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "74"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Description\": \"Your token has expired\",\n    \"Error\": \"token expired\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Change Password",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"password\": \"passwo\",\n    \"new_password\": \"password\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/vendor/change_password",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"change_password"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						},
+						"description": "### This Resource changes a Vendor's password when the password is not forgotten. It requests the present password, ensures its correct and saves a new the new entered.\n\n`Note:`\n\n\\* Authorization header must be set to `Bearer {access_token}`  \n\\* Token must be fresh"
+					},
+					"response": [
+						{
+							"name": "Change Password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"pass\",\n    \"new_password\": \"password\"\n}"
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/change_password",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"change_password"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 21:13:32 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "65"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Your Password has been changed Successfully\"\n}"
+						},
+						{
+							"name": "Incorrect password",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"password\": \"passwo\",\n    \"new_password\": \"password\"\n}"
+								},
+								"url": {
+									"raw": "{{url}}/vendor/change_password",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"change_password"
+									],
+									"query": [
+										{
+											"key": "",
+											"value": null,
+											"disabled": true
+										}
+									]
+								}
+							},
+							"status": "UNAUTHORIZED",
+							"code": 401,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 10 Oct 2022 21:18:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "48"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Your Password is incorrect\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Access Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vendor/access_logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"access_logout"
+							]
+						},
+						"description": "### Revokes the Vendor's access token. This request and the Refresh Logout must both pass to successfully logout a Vendor.\n\n`Note:`\n\n\\*   Must be logged in\n\\*   Authorization header must be set to `Bearer {access_token}`"
+					},
+					"response": [
+						{
+							"name": "Access Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/access_logout",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"access_logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 02:20:12 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "61"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Your access tokens have been logged out\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Refresh Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vendor/refresh_logout",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"refresh_logout"
+							]
+						},
+						"description": "### Revokes the Vendor's refresh token. This request and the Access Logout must both pass to successfully logout a Vendor.\n\n`Note:`\n\n\\*   Must be logged in\n\\*   Authorization header must be set to `Bearer {refresh_token}`"
+					},
+					"response": [
+						{
+							"name": "Refresh Logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDIxOTc3NSwianRpIjoiMzcxNmFmYjYtNWNjOC00NGI5LWI3MmMtZjJmMWE2NWY3MDg2...",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/refresh_logout",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"refresh_logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 02:20:23 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "62"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Your refresh tokens have been logged out\"\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "images",
+			"item": [
+				{
+					"name": "Logo Upload",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/home/zubic/Pictures/Screenshots/img_err_folder.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}/vendor/logo_upload",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"logo_upload"
+							]
+						},
+						"description": "## Avatar Upload or Vendor's Logo Upload. \n\n`Note:`\n\n\\*   Content-Type should be set to multipart/form-data\n\\*   File should be sent with `\"image\"` key\n\\*   Authorization header should be set to `Bearer {access_token}`\n\\*   The only allowed extensions include  \n    `'.jpg', '.jpe', '.jpeg', '.png', '.gif', '.svg', '.bmp'`"
+					},
+					"response": [
+						{
+							"name": "Logo Upload",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi..."
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/zubic/Pictures/Screenshots/screen2.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/logo_upload",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"logo_upload"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 02:26:43 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "49"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"message\": \"Image vendor_5.png Uploaded\"\n}"
+						},
+						{
+							"name": "unsupported image format",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/zubic/Pictures/Screenshots/postman.poo"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/vendor/logo_upload",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo_upload"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 02:27:40 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "56"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Image extension '.poo' not allowed\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Get a Logo",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vendor/logo/50",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"logo",
+								"50"
+							]
+						},
+						"description": "### Returns an image file if found. Accepts Vendor ID as path parameter for the Vendor image you need.\n\n`Note:`\n\n\\*   Authorization header must be set to \\`Bearer access_token}"
+					},
+					"response": [
+						{
+							"name": "Get a Logo",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/logo/5",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"logo",
+										"5"
+									]
+								}
+							},
+							"_postman_previewlanguage": null,
+							"header": null,
+							"cookie": [],
+							"body": null
+						},
+						{
+							"name": "Image not found",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/logo/50",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo",
+										"50"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 02:45:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Image not found\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Delete a Logo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/vendor/logo/5",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"logo",
+								"5"
+							]
+						},
+						"description": "### Deletes a Vendor's Logo/Avatar. It takes the Vendor ID as path parameter. Privilege is limited only to owner of the account.\n\n`Note:`\n\n\\*   Authorization header must be set to `Bearer {access_token}`\n\\*   Privilege for this operation will only be for owner of the account"
+					},
+					"response": [
+						{
+							"name": "Delete a Logo",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/logo/5",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"logo",
+										"5"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 03:07:53 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "35"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Image Deleted\"\n}"
+						},
+						{
+							"name": "Image not found",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/logo/20",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo",
+										"20"
+									]
+								}
+							},
+							"status": "NOT FOUND",
+							"code": 404,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 03:04:01 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "37"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Image not found\"\n}"
+						},
+						{
+							"name": "No privilege granted",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/logo/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo",
+										"2"
+									]
+								}
+							},
+							"status": "FORBIDDEN",
+							"code": 403,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Tue, 11 Oct 2022 03:06:30 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "77"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"You do not have the privilege to perform this operation\"\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}

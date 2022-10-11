@@ -1,0 +1,35 @@
+{
+  "ven_email_already_exists": "Email <{}> already exists!",
+  "ven_email_sent": "An Email has been sent to <{}>. Please open and complete your Registration",
+  "ven_not_found": "Vendor Account Not Found",
+  "ven_deleted" : "Vendor Account Deleted",
+  "ven_invalid_credentials": "Invalid credentials supplied",
+  "ven_restaurant_exists": "Restaurant name <{}> already exists, please choose another one",
+  "ven_restaurant_created": "Restaurant <{}> created successfully",
+  "ven_internal_error": "Internal server error! An error occurred while processing your request.",
+  "ven_email_already_validated": "Account with email <{}> already Validated",
+  "ven_confirm_link_used": "Confirmation ID already validated! Ensure to use correct confirmation ID sent to your Email",
+  "ven_unvalidated": "Account not validated yet! Check email and proceed to complete Registration before login",
+  "ven_not_privileged": "You do not have the privilege to perform this operation",
+  "ven_logout_successful": "Your {} tokens have been logged out",
+  "ven_reset_password_email_sent": "An email has been sent to you, to allow you reset your password",
+  "ven_password_reset": "Your Password Reset was successful! You will need to login with your new password",
+  "ven_password_changed": "Your Password has been changed Successfully",
+  "ven_incorrect_password": "Your Password is incorrect",
+
+  "mailgun_failed_load_api_key": "Failed to load MailGun API key.",
+  "mailgun_failed_load_domain": "Failed to load MailGun domain.",
+  "mailgun_error_send_email": "Error in sending confirmation email, user registration failed.",
+
+  "confirm_not_found": "Confirmation ID not found",
+  "confirm_link_expired": "Confirmation ID has expired",
+  "confirm_resend_successful": "Confirmation Email has been re-sent to your email <{}>",
+  "confirm_resend_fail": "Fail to resend confirmation email! Please try again",
+
+  "img_uploaded": "Image {} Uploaded",
+  "img_extension_not_allowed": "Image extension '{}' not allowed",
+  "img_failed_to_delete": "Internal Server Error! Failed to delete Image",
+  "img_internal_error" : "Internal Server Error! Could not upload the Image",
+  "img_not_found": "Image not found",
+  "img_deleted": "Image Deleted"
+}
