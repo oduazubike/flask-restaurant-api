@@ -1,3 +1,4 @@
+import os
 import traceback
 
 from flask import request
@@ -14,6 +15,7 @@ from schemas.vendor_schema import VendorEmailSchema, VendorSchema, PasswordSchem
 from libs.datetime_helper import datetime_utc_now
 from libs.string_getter import gettext
 from libs.mailgun import MailGunException
+from libs import image_helper
 
 email_schema = VendorEmailSchema()
 vendor_schema = VendorSchema()
@@ -43,7 +45,7 @@ class VendorEmailRegister(Resource):
             # creates confirmation obj, passes the vendor's id as the confirmation
             # ForeignKey to map that vendor to that confirmation obj
             confirmation.save_to_database()
-            vendor.send_confirmation_email()
+            # vendor.send_confirmation_email()
             return {"Message": gettext("ven_email_sent").format(vendor.email)}, 200
         except MailGunException as e:
             vendor.delete_from_database()
@@ -74,7 +76,7 @@ class ResendEmailConfirmation(Resource):
 
             new_confirmation = VendorEmailModel(vendor.id)
             new_confirmation.save_to_database()
-            vendor.send_confirmation_email()
+            # vendor.send_confirmation_email()
             return {"Message": gettext("confirm_resend_successful").format(vendor.email)}, 200
         except MailGunException as e:
             return {"message": str(e)}, 500
@@ -232,6 +234,9 @@ class Vendor(Resource):
         limited only the vendor that owns the account"""
         identity = get_jwt_identity()
 
+        folder = "vendor_logos"
+        filename = f"vendor_{vendor_id}"
+
         vendor = VendorModel.find_by_id(vendor_id)
         if not vendor:
             return {"Message": gettext("ven_not_found")}, 404
@@ -239,8 +244,16 @@ class Vendor(Resource):
         if identity != vendor_id:
             return {"Message": gettext("ven_not_privileged")}, 403
 
-        vendor.delete_from_database()
-        return {"Message": gettext("ven_deleted")}, 200
+        try:
+            # deletes the vendor's image alongside
+            logo_path = image_helper.find_by_extension(filename, folder)
+            if logo_path is not None:  # if the path exists
+                os.remove(logo_path)
+            vendor.delete_from_database()
+            return {"Message": gettext("ven_deleted")}, 200
+        except:
+            traceback.print_exc()
+            return {"Message": gettext("ven_internal_error")}, 500
 
 
 class Vendors(Resource):

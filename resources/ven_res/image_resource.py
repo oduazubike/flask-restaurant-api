@@ -59,7 +59,7 @@ class Logo(Resource):
 
     @classmethod
     @jwt_required()
-    def delete(cls, vendor_id):
+    def delete(cls, vendor_id: int):
         """Checks if vendor is the account owner, if not
         delete will not be authorized"""
         identity = get_jwt_identity()

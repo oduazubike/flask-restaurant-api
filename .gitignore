@@ -4,3 +4,5 @@ NOTES
 test.py
 .env
 venv
+database.db
+static
