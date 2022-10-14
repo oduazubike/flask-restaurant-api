@@ -36,6 +36,18 @@ class VendorSchema(SQLAlchemySchema):
     validated = auto_field(dump_only=True)
 
 
+class VendorUpdateSchema(SQLAlchemySchema):
+    """Schema for update of vendor account details"""
+    class Meta:
+        model = VendorModel
+        load_instance = True
+        sqla_session = db.session
+
+    full_name = auto_field()
+    dob = auto_field()
+    city = auto_field()
+
+
 class PasswordSchema(SQLAlchemySchema):
     """Schema for password only entries: CriticalLogin and ResetPassword"""
     class Meta:

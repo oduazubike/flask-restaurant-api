@@ -15,7 +15,7 @@ class VendorModel(db.Model):
     dob = db.Column(db.String)
     restaurant = db.Column(db.String(80), unique=True)
     city = db.Column(db.String(80))
-    date_created = db.Column(db.String, nullable=False)
+    date_created = db.Column(db.DateTime, nullable=False)
     validated = db.Column(db.Boolean, default=False)
 
     confirmation = db.relationship(
@@ -58,10 +58,6 @@ class VendorModel(db.Model):
 
     def delete_from_database(self) -> None:
         db.session.delete(self)
-        db.session.commit()
-
-    @staticmethod
-    def commit_change() -> None:
         db.session.commit()
 
     @staticmethod

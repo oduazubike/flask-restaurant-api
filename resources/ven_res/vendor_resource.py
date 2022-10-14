@@ -11,7 +11,9 @@ from bc import bcrypt
 from models.vendor_model import VendorModel
 from models.confirmation_model import VendorEmailModel
 from models.blocklist_model import BlocklistModel
-from schemas.vendor_schema import VendorEmailSchema, VendorSchema, PasswordSchema
+from schemas.vendor_schema import (VendorEmailSchema,
+                                   VendorUpdateSchema, VendorSchema,
+                                   PasswordSchema)
 from libs.datetime_helper import datetime_utc_now
 from libs.string_getter import gettext
 from libs.mailgun import MailGunException
@@ -21,6 +23,7 @@ email_schema = VendorEmailSchema()
 vendor_schema = VendorSchema()
 all_vendor_schema = VendorSchema(many=True)
 critical_schema = PasswordSchema()
+update_schema = VendorUpdateSchema()
 
 
 class VendorEmailRegister(Resource):
@@ -114,11 +117,11 @@ class VendorRegister(Resource):
             return {"Message": gettext("ven_confirm_link_used").format(vendor.email)}, 400
 
         try:
-            vendor.commit_change()
+            vendor.save_to_database()
             vendor.validated = True
             # validates vendors on successful submission of details
             vendor.date_created = datetime_utc_now()  # resets time to this time of submission
-            vendor.commit_change()
+            vendor.save_to_database()
             return {"Message": gettext("ven_restaurant_created").format(vendor.restaurant)}, 201
         except IntegrityError:
             # catches SQLAlchemy IntegrityError because vendor.restaurant is unique=True
@@ -260,6 +263,32 @@ class Vendors(Resource):
     @classmethod
     def get(cls):
         return {"Vendors": all_vendor_schema.dump(VendorModel.find_all())}, 200
+
+
+class VendorUpdate(Resource):
+    @classmethod
+    @jwt_required()
+    def put(cls):
+        vendor_json = request.get_json()
+
+        vendor_id = get_jwt_identity()
+        vendor = VendorModel.find_by_id(vendor_id)
+
+        if not vendor_json["full_name"]:
+            vendor_json["full_name"] = vendor.full_name
+        if not vendor_json["dob"]:
+            vendor_json["dob"] = vendor.dob
+        if not vendor_json["city"]:
+            vendor_json["city"] = vendor.city
+
+        vendor.full_name = vendor_json["full_name"]
+        vendor.dob = vendor_json["dob"]
+        vendor.city = vendor_json["city"]
+
+        update_schema.load(vendor_json)
+        vendor.save_to_database()
+
+        return vendor_schema.dump(vendor), 200
 
 
 # Implement the vendor resource to display a few vendor info and all items it has.
