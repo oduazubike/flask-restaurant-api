@@ -16,6 +16,7 @@
   "ven_password_reset": "Your Password Reset was successful! You will need to login with your new password",
   "ven_password_changed": "Your Password has been changed Successfully",
   "ven_incorrect_password": "Your Password is incorrect",
+  "ven_restaurant_name_update_time_not_reached": "You can only update the Restaurant name 30days after registration or previous update",
 
   "mailgun_failed_load_api_key": "Failed to load MailGun API key.",
   "mailgun_failed_load_domain": "Failed to load MailGun domain.",

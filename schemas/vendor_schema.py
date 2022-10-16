@@ -43,9 +43,19 @@ class VendorUpdateSchema(SQLAlchemySchema):
         load_instance = True
         sqla_session = db.session
 
-    full_name = auto_field()
-    dob = auto_field()
-    city = auto_field()
+    full_name = auto_field(required=True)
+    dob = auto_field(required=True)
+    city = auto_field(required=True)
+
+
+class RestaurantNameSchema(SQLAlchemySchema):
+    """Schema for update of Restaurant name"""
+    class Meta:
+        model = VendorModel
+        load_instance = True
+        sqla_session = db.session
+
+    restaurant = auto_field(required=True)
 
 
 class PasswordSchema(SQLAlchemySchema):

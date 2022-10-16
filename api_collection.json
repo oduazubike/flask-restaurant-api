@@ -11,13 +11,481 @@
 			"name": "vendors",
 			"item": [
 				{
+					"name": "images",
+					"item": [
+						{
+							"name": "Logo Upload",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/home/zubic/Pictures/Screenshots/img_err_code.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/vendor/logo_upload",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo_upload"
+									]
+								},
+								"description": "## Avatar Upload or Vendor's Logo Upload. \n\n`Note:`\n\n\\*   Content-Type should be set to multipart/form-data\n\\*   File should be sent with `\"image\"` key\n\\*   Authorization header should be set to `Bearer {access_token}`\n\\*   The only allowed extensions include  \n    `'.jpg', '.jpe', '.jpeg', '.png', '.gif', '.svg', '.bmp'`"
+							},
+							"response": [
+								{
+									"name": "Logo Upload",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi..."
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/home/zubic/Pictures/Screenshots/screen2.png"
+												}
+											]
+										},
+										"url": {
+											"raw": "127.0.0.1:5000/vendor/logo_upload",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "5000",
+											"path": [
+												"vendor",
+												"logo_upload"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Werkzeug/2.2.2 Python/3.10.4"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Oct 2022 02:26:43 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "49"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"message\": \"Image vendor_5.png Uploaded\"\n}"
+								},
+								{
+									"name": "unsupported image format",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "multipart/form-data"
+											},
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/home/zubic/Pictures/Screenshots/postman.poo"
+												}
+											]
+										},
+										"url": {
+											"raw": "{{url}}/vendor/logo_upload",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vendor",
+												"logo_upload"
+											]
+										}
+									},
+									"status": "BAD REQUEST",
+									"code": 400,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Werkzeug/2.2.2 Python/3.10.4"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Oct 2022 02:27:40 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "56"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Message\": \"Image extension '.poo' not allowed\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Get a Logo",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/logo/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo",
+										"1"
+									]
+								},
+								"description": "### Returns an image file if found. Accepts Vendor ID as path parameter for the Vendor image you need.\n\n`Note:`\n\n\\*   Authorization header must be set to \\`Bearer access_token}"
+							},
+							"response": [
+								{
+									"name": "Get a Logo",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "127.0.0.1:5000/vendor/logo/5",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "5000",
+											"path": [
+												"vendor",
+												"logo",
+												"5"
+											]
+										}
+									},
+									"_postman_previewlanguage": null,
+									"header": null,
+									"cookie": [],
+									"body": null
+								},
+								{
+									"name": "Image not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/vendor/logo/50",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vendor",
+												"logo",
+												"50"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Werkzeug/2.2.2 Python/3.10.4"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Oct 2022 02:45:36 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Message\": \"Image not found\"\n}"
+								}
+							]
+						},
+						{
+							"name": "Delete a Logo",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{access_token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/vendor/logo/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"vendor",
+										"logo",
+										"1"
+									]
+								},
+								"description": "### Deletes a Vendor's Logo/Avatar. It takes the Vendor ID as path parameter. Privilege is limited only to owner of the account.\n\n`Note:`\n\n\\*   Authorization header must be set to `Bearer {access_token}`\n\\*   Privilege for this operation will only be for owner of the account"
+							},
+							"response": [
+								{
+									"name": "Delete a Logo",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "127.0.0.1:5000/vendor/logo/5",
+											"host": [
+												"127",
+												"0",
+												"0",
+												"1"
+											],
+											"port": "5000",
+											"path": [
+												"vendor",
+												"logo",
+												"5"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Werkzeug/2.2.2 Python/3.10.4"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Oct 2022 03:07:53 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "35"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Message\": \"Image Deleted\"\n}"
+								},
+								{
+									"name": "Image not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/vendor/logo/20",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vendor",
+												"logo",
+												"20"
+											]
+										}
+									},
+									"status": "NOT FOUND",
+									"code": 404,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Werkzeug/2.2.2 Python/3.10.4"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Oct 2022 03:04:01 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "37"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Message\": \"Image not found\"\n}"
+								},
+								{
+									"name": "No privilege granted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Authorization",
+												"value": "Bearer {{access_token}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{url}}/vendor/logo/2",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"vendor",
+												"logo",
+												"2"
+											]
+										}
+									},
+									"status": "FORBIDDEN",
+									"code": 403,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Server",
+											"value": "Werkzeug/2.2.2 Python/3.10.4"
+										},
+										{
+											"key": "Date",
+											"value": "Tue, 11 Oct 2022 03:06:30 GMT"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										},
+										{
+											"key": "Content-Length",
+											"value": "77"
+										},
+										{
+											"key": "Connection",
+											"value": "close"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"Message\": \"You do not have the privilege to perform this operation\"\n}"
+								}
+							]
+						}
+					]
+				},
+				{
 					"name": "Email Register",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"tochi@gmail.com\",\n    \"password\": \"password\"\n}",
+							"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -275,14 +743,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/vendor/resend_email/odu@gmail.com",
+							"raw": "{{url}}/vendor/resend_email/oduazubike@gmail.com",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"vendor",
 								"resend_email",
-								"odu@gmail.com"
+								"oduazubike@gmail.com"
 							]
 						},
 						"description": "#### This Resource is to request a resend of the confirmation email in case the initial one expires, or is unused for some other reasons . It receives the email in the path parameter. ID sent to email also to be used for building Register Vendor request URL.\n\n`Note:`\n\n\\* Email must already exist(must have already registered email)  \n\\* Will only process request for un-validated email accounts  \n\\* Email must be passed in URL"
@@ -307,10 +775,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}/vendor/resend_email/oduazubike@gmail.com",
+									"raw": "127.0.0.1:5000/vendor/resend_email/oduazubike@gmail.com",
 									"host": [
-										"{{url}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "5000",
 									"path": [
 										"vendor",
 										"resend_email",
@@ -496,7 +968,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"full_name\": \"tochi Doe\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"tochi\",\n    \"city\": \"New York city\"\n}",
+							"raw": "{\n    \"full_name\": \"azu Mic\",\n    \"dob\": \"7 11, 2022\",\n    \"restaurant\": \"vics\",\n    \"city\": \"New York city\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -504,14 +976,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/vendor/register/b77005a914a3486e99965d3c8cf535ac",
+							"raw": "{{url}}/vendor/register/f30361f422cb4fd0bc3f56994fe5f575",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"vendor",
 								"register",
-								"b77005a914a3486e99965d3c8cf535ac"
+								"f30361f422cb4fd0bc3f56994fe5f575"
 							]
 						},
 						"description": "#### This Resource completes the registration of a Vendor. Uses the confirmation ID sent in the email as path parameter.\n\n`Note:`\n\n\\* Duplicate **Restaurant name** not allowed  \n\\* Confirmation ID expires in 30 minutes  \n\\* Confirmation ID can only be used once"
@@ -532,10 +1004,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/vendor/register/a32c44a4f57d4b5caad0c071df1e26df",
+									"raw": "127.0.0.1:5000/vendor/register/a32c44a4f57d4b5caad0c071df1e26df",
 									"host": [
-										"{{url}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "5000",
 									"path": [
 										"vendor",
 										"register",
@@ -826,7 +1302,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"email\": \"tochi@gmail.com\",\n    \"password\": \"password\"\n}",
+							"raw": "{\n    \"email\": \"oduazubike@gmail.com\",\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -861,10 +1337,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}/vendor/login",
+									"raw": "127.0.0.1:5000/vendor/login",
 									"host": [
-										"{{url}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "5000",
 									"path": [
 										"vendor",
 										"login"
@@ -1065,7 +1545,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{refresh_token}}",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDIxOTc3NSwianRpIjoiMzcxNmFmYjYtNWNjOC00NGI5LWI3MmMtZjJmMWE2NWY3MDg2...",
 										"type": "text"
 									},
 									{
@@ -1075,10 +1555,14 @@
 									}
 								],
 								"url": {
-									"raw": "{{url}}//vendor/refresh",
+									"raw": "127.0.0.1:5000//vendor/refresh",
 									"host": [
-										"{{url}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "5000",
 									"path": [
 										"",
 										"vendor",
@@ -1267,7 +1751,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\": \"passord\"\n}",
+							"raw": "{\n    \"password\": \"password\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1295,7 +1779,7 @@
 								"header": [
 									{
 										"key": "Authorization",
-										"value": "Bearer {{refresh_token}}",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTY2NDIxOTc3NSwianRpIjoiMzcxNmFmYjYtNWNjOC00NGI5LWI3MmMtZjJmMWE2NWY3MDg2...",
 										"type": "text"
 									},
 									{
@@ -1314,10 +1798,14 @@
 									}
 								},
 								"url": {
-									"raw": "{{url}}//vendor/critical_login",
+									"raw": "127.0.0.1:5000//vendor/critical_login",
 									"host": [
-										"{{url}}"
+										"127",
+										"0",
+										"0",
+										"1"
 									],
+									"port": "5000",
 									"path": [
 										"",
 										"vendor",
@@ -1784,14 +2272,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/vendor/confirmations/40",
+							"raw": "{{url}}/vendor/confirmations/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"vendor",
 								"confirmations",
-								"40"
+								"1"
 							]
 						},
 						"description": "#### This Resource returns all confirmation details of a Vendor. This is meant for testing only"
@@ -1899,14 +2387,14 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "{{url}}/vendor/recent_confirmation/40",
+							"raw": "{{url}}/vendor/recent_confirmation/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"vendor",
 								"recent_confirmation",
-								"40"
+								"1"
 							]
 						},
 						"description": "#### Returns the most recent confirmation details of a Vendor. This resource is for testing only."
@@ -2026,7 +2514,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"full_name\": \"Janeth Doe\",\n    \"dob\": \"05 04, 22\",\n    \"city\": \"Working city\"\n}"
+							"raw": "{\n    \"full_name\": \"My name\",\n    \"dob\": \"05 04, 22\",\n    \"city\": \"Starling city\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/vendor/update",
@@ -2103,6 +2591,230 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"id\": 4,\n    \"validated\": true,\n    \"email\": \"tochi@gmail.com\",\n    \"full_name\": \"Janeth Doe\",\n    \"city\": \"Working city\",\n    \"date_created\": \"2022-10-14T20:28:00.480009\",\n    \"restaurant\": \"tochi\",\n    \"dob\": \"05 04, 22\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Restaurant Name Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"restaurant\": \"Fast Foods\"\n}"
+						},
+						"url": {
+							"raw": "{{url}}/vendor/restaurant_update",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"vendor",
+								"restaurant_update"
+							]
+						},
+						"description": "## Updates the Vendor account's restaurant name. This is only allowed 30days after registration or after last update of this resource. \n\n`Note:`\n- Set Authorization header to `Bearer {access_token}`\n- Token must be fresh\n- Duplicate name not allowed\n- Request will not be granted less then 30days after registration or last update"
+					},
+					"response": [
+						{
+							"name": "Restaurant Name Update",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurant\": \"Fast Foods\"\n}"
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/restaurant_update",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"restaurant_update"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 16 Oct 2022 12:59:25 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "236"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"validated\": true,\n    \"full_name\": \"azu Mic\",\n    \"restaurant\": \"Fast Foods\",\n    \"dob\": \"7 11, 2022\",\n    \"city\": \"New York city\",\n    \"date_created\": \"2022-10-16T12:49:55.012862\",\n    \"email\": \"victor@gmail.com\",\n    \"id\": 1\n}"
+						},
+						{
+							"name": "Update time not reached",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurant\": \"Fast Foods\"\n}"
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/restaurant_update",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"restaurant_update"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 16 Oct 2022 12:56:36 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "106"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"You can only update the Restaurant name 30days after registration or previous update\"\n}"
+						},
+						{
+							"name": "Duplicate restaurant name",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJmcmVzaCI6dHJ1ZSwiaWF0IjoxNjY0MjE5Nzc1LCJqdGkiOiJjYjVjNzE2NS1mYTJjLTQ3MDgtYTRkZS1hYTczNmM1YTk4ZmUi...",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"restaurant\": \"Fast Foods\"\n}"
+								},
+								"url": {
+									"raw": "127.0.0.1:5000/vendor/restaurant_update",
+									"host": [
+										"127",
+										"0",
+										"0",
+										"1"
+									],
+									"port": "5000",
+									"path": [
+										"vendor",
+										"restaurant_update"
+									]
+								}
+							},
+							"status": "BAD REQUEST",
+							"code": 400,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Werkzeug/2.2.2 Python/3.10.4"
+								},
+								{
+									"key": "Date",
+									"value": "Sun, 16 Oct 2022 13:04:38 GMT"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Content-Length",
+									"value": "92"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"Message\": \"Restaurant name <Fast Foods> already exists, please choose another one\"\n}"
 						}
 					]
 				},
@@ -2410,7 +3122,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"password\": \"passwo\",\n    \"new_password\": \"password\"\n}"
+							"raw": "{\n    \"password\": \"password\",\n    \"new_password\": \"password\"\n}"
 						},
 						"url": {
 							"raw": "{{url}}/vendor/change_password",
@@ -2715,462 +3427,6 @@
 							],
 							"cookie": [],
 							"body": "{\n    \"message\": \"Your refresh tokens have been logged out\"\n}"
-						}
-					]
-				}
-			]
-		},
-		{
-			"name": "images",
-			"item": [
-				{
-					"name": "Logo Upload",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}"
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "image",
-									"type": "file",
-									"src": "/home/zubic/Pictures/Screenshots/screen2.png"
-								}
-							]
-						},
-						"url": {
-							"raw": "{{url}}/vendor/logo_upload",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"vendor",
-								"logo_upload"
-							]
-						},
-						"description": "## Avatar Upload or Vendor's Logo Upload. \n\n`Note:`\n\n\\*   Content-Type should be set to multipart/form-data\n\\*   File should be sent with `\"image\"` key\n\\*   Authorization header should be set to `Bearer {access_token}`\n\\*   The only allowed extensions include  \n    `'.jpg', '.jpe', '.jpeg', '.png', '.gif', '.svg', '.bmp'`"
-					},
-					"response": [
-						{
-							"name": "Logo Upload",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "multipart/form-data"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "image",
-											"type": "file",
-											"src": "/home/zubic/Pictures/Screenshots/screen2.png"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/vendor/logo_upload",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo_upload"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.2.2 Python/3.10.4"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Oct 2022 02:26:43 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "49"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"message\": \"Image vendor_5.png Uploaded\"\n}"
-						},
-						{
-							"name": "unsupported image format",
-							"originalRequest": {
-								"method": "PUT",
-								"header": [
-									{
-										"key": "Content-Type",
-										"value": "multipart/form-data"
-									},
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}"
-									}
-								],
-								"body": {
-									"mode": "formdata",
-									"formdata": [
-										{
-											"key": "image",
-											"type": "file",
-											"src": "/home/zubic/Pictures/Screenshots/postman.poo"
-										}
-									]
-								},
-								"url": {
-									"raw": "{{url}}/vendor/logo_upload",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo_upload"
-									]
-								}
-							},
-							"status": "BAD REQUEST",
-							"code": 400,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.2.2 Python/3.10.4"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Oct 2022 02:27:40 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "56"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"Message\": \"Image extension '.poo' not allowed\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Get a Logo",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/vendor/logo/1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"vendor",
-								"logo",
-								"1"
-							]
-						},
-						"description": "### Returns an image file if found. Accepts Vendor ID as path parameter for the Vendor image you need.\n\n`Note:`\n\n\\*   Authorization header must be set to \\`Bearer access_token}"
-					},
-					"response": [
-						{
-							"name": "Get a Logo",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/vendor/logo/5",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo",
-										"5"
-									]
-								}
-							},
-							"_postman_previewlanguage": null,
-							"header": null,
-							"cookie": [],
-							"body": null
-						},
-						{
-							"name": "Image not found",
-							"originalRequest": {
-								"method": "GET",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/vendor/logo/50",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo",
-										"50"
-									]
-								}
-							},
-							"status": "NOT FOUND",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.2.2 Python/3.10.4"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Oct 2022 02:45:36 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"Message\": \"Image not found\"\n}"
-						}
-					]
-				},
-				{
-					"name": "Delete a Logo",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Authorization",
-								"value": "Bearer {{access_token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/vendor/logo/1",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"vendor",
-								"logo",
-								"1"
-							]
-						},
-						"description": "### Deletes a Vendor's Logo/Avatar. It takes the Vendor ID as path parameter. Privilege is limited only to owner of the account.\n\n`Note:`\n\n\\*   Authorization header must be set to `Bearer {access_token}`\n\\*   Privilege for this operation will only be for owner of the account"
-					},
-					"response": [
-						{
-							"name": "Delete a Logo",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/vendor/logo/5",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo",
-										"5"
-									]
-								}
-							},
-							"status": "OK",
-							"code": 200,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.2.2 Python/3.10.4"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Oct 2022 03:07:53 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "35"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"Message\": \"Image Deleted\"\n}"
-						},
-						{
-							"name": "Image not found",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/vendor/logo/20",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo",
-										"20"
-									]
-								}
-							},
-							"status": "NOT FOUND",
-							"code": 404,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.2.2 Python/3.10.4"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Oct 2022 03:04:01 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "37"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"Message\": \"Image not found\"\n}"
-						},
-						{
-							"name": "No privilege granted",
-							"originalRequest": {
-								"method": "DELETE",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{access_token}}",
-										"type": "text"
-									}
-								],
-								"url": {
-									"raw": "{{url}}/vendor/logo/2",
-									"host": [
-										"{{url}}"
-									],
-									"path": [
-										"vendor",
-										"logo",
-										"2"
-									]
-								}
-							},
-							"status": "FORBIDDEN",
-							"code": 403,
-							"_postman_previewlanguage": "json",
-							"header": [
-								{
-									"key": "Server",
-									"value": "Werkzeug/2.2.2 Python/3.10.4"
-								},
-								{
-									"key": "Date",
-									"value": "Tue, 11 Oct 2022 03:06:30 GMT"
-								},
-								{
-									"key": "Content-Type",
-									"value": "application/json"
-								},
-								{
-									"key": "Content-Length",
-									"value": "77"
-								},
-								{
-									"key": "Connection",
-									"value": "close"
-								}
-							],
-							"cookie": [],
-							"body": "{\n    \"Message\": \"You do not have the privilege to perform this operation\"\n}"
 						}
 					]
 				}

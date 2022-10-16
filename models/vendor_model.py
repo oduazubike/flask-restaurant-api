@@ -18,6 +18,9 @@ class VendorModel(db.Model):
     date_created = db.Column(db.DateTime, nullable=False)
     validated = db.Column(db.Boolean, default=False)
 
+    res_last_updated = db.Column(db.DateTime)
+    # when the restaurant name was last updated
+
     confirmation = db.relationship(
         "VendorEmailModel", lazy="dynamic",
         cascade="all, delete-orphan", overlaps="vendor"
@@ -46,6 +49,8 @@ class VendorModel(db.Model):
         subject = "Registration Confirmation"
         link = request.url_root[:-1] + url_for(
             "vendorregister", confirmation_id=VendorEmailModel.most_recent_confirmation().id)
+        # to strip last character from the request.url_root(127.0.0.1:5000/)
+        # because the url_for starts with a slash(/)
         text = f"Please click the link to confirm your registration: {link}\n" \
             f"Copy this ID <{VendorEmailModel.most_recent_confirmation().id}> \n" \
             f"And use as confirmation id in the Register Resource"
@@ -63,5 +68,4 @@ class VendorModel(db.Model):
     @staticmethod
     def rollback_change() -> None:
         db.session.rollback()
-
-# static methods because they do not take an argument
+        # static methods because they do not take an argument

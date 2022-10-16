@@ -14,7 +14,7 @@ from resources.ven_res.vendor_resource import (
     VendorEmailRegister, VendorRegister, TokenRefresh,
     Vendor, Vendors, VendorLogin, ResendEmailConfirmation,
     CriticalLogin, VendorLogoutAccess, VendorLogoutRefresh,
-    VendorUpdate)
+    VendorUpdate, RestaurantNameUpdate)
 from resources.ven_res.confirmation_resource import EmailConfirmations, RecentConfirmation
 from resources.ven_res.password_resource import ForgotPassword, ResetPassword, ChangePassword
 from models.blocklist_model import BlocklistModel
@@ -124,6 +124,7 @@ api.add_resource(ForgotPassword, "/vendor/forgot/password")
 api.add_resource(ResetPassword, "/vendor/reset/<string:token>")
 api.add_resource(ChangePassword, "/vendor/change_password")
 api.add_resource(VendorUpdate, "/vendor/update")
+api.add_resource(RestaurantNameUpdate, "/vendor/restaurant_update")
 
 
 if __name__ == "__main__":
