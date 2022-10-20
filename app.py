@@ -10,15 +10,15 @@ from flask_uploads import configure_uploads
 from db import db
 from ma import ma
 from bc import bcrypt
-from resources.ven_res.vendor_resource import (
+from resources.vendor_resource import (
     VendorEmailRegister, VendorRegister, TokenRefresh,
     Vendor, Vendors, VendorLogin, ResendEmailConfirmation,
     CriticalLogin, VendorLogoutAccess, VendorLogoutRefresh,
     VendorUpdate, RestaurantNameUpdate)
-from resources.ven_res.confirmation_resource import EmailConfirmations, RecentConfirmation
-from resources.ven_res.password_resource import ForgotPassword, ResetPassword, ChangePassword
+from resources.confirmation_resource import EmailConfirmations, RecentConfirmation
+from resources.password_resource import ForgotPassword, ResetPassword, ChangePassword
 from models.blocklist_model import BlocklistModel
-from resources.ven_res.image_resource import LogoUpload, Logo
+from resources.image_resource import LogoUpload, Logo
 from libs.image_helper import IMAGE_SET
 
 app = Flask(__name__)
